@@ -69,7 +69,7 @@ searchForm.addEventListener("submit", getInputValue);
 //Busqueda en la API
 //api key de uso de API en películas= 8284dc57
 const fetchMovies = async (searchText) => {
-  let url = `http://www.omdbapi.com/?apikey=8284dc57&t=${searchText}`;
+  let url = `https://www.omdbapi.com/?apikey=8284dc57&t=${searchText}`;
   try {
     const response = await fetch(url);
     data = await response.json();
