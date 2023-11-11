@@ -7,10 +7,6 @@ Autor: Alex Erba
 
 API: http://www.omdbapi.com/ para ver reseñas de peliculas
 
-![image](https://github.com/familiaerba/TareaWebAPI/assets/105739165/1ebd6dee-58bb-4ca0-96e3-7234e30f4609)
+![image](https://github.com/familiaerba/TareaWebAPI/assets/105739165/c9c35a71-f4d3-41ca-82a3-3b00002e9714)
 
-![image](https://github.com/familiaerba/TareaWebAPI/assets/105739165/d84e4c16-43b5-42aa-baae-7f00b022e621)
-
-![image](https://github.com/familiaerba/TareaWebAPI/assets/105739165/75531ff2-da19-48f2-91d1-d52b264c1bc3)
-
-
+![image](https://github.com/familiaerba/TareaWebAPI/assets/105739165/9123422b-288a-4448-ac86-ae57a78af637)
