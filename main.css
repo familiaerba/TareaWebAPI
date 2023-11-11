@@ -1,319 +1,178 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-/* Configuraciones iniciales */
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
+  font-family: cursive;
 }
 
-html {
-  font-size: 10px;
+/*Diseño del titulo de la pagina */
+.titulo {
+  text-align: center;
+  font-size: x-large;
+  background: linear-gradient(to right, rgb(97, 67, 133), rgb(81, 99, 149));
+  height: 20vh;
+  padding-top: 10px;
+}
+
+/*Le da un efecto de doble linea al titulo */
+.t-stroke {
+  color: transparent;
+  -moz-text-stroke-width: 2px;
+  -webkit-text-stroke-width: 2px;
+  -moz-text-stroke-color: #000000;
+  -webkit-text-stroke-color: #ffffff;
+}
+
+.t-shadow {
+  text-shadow: 4px 4px #8dffcd;
 }
 
 body {
-  font-size: 1.7rem;
-  min-height: 100vh;
-  background-color: red;
-  background: linear-gradient(169deg, #ececec 0%, #2e2d2d 100%);
-  line-height: 1.6;
-  font-family: "Lucida Console", sans-serif;
+  background: linear-gradient(169deg, white 0%, #c2bebe 100%);
+}
+
+/* Formato del cuadro de busqeuda  */
+.searchBox {
+  float: left;
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: stretch;
+  padding: 4px;
+  margin-top: 3%;
+  margin-bottom: 3%;
 }
 
-button,
-input {
-  font-family: inherit;
-  font-size: 1.8rem;
-  outline: 0;
-  border: none;
-  background-color: transparent;
-}
-
-img {
+/* Componente que tiene las peliculas encontradas que concidan con el texto*/
+.resultSearch {
+  float: left;
   width: 100%;
-  display: block;
-}
-
-.main-wrapper {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-}
-
-.app {
-  background-color: black;
-  margin: 2rem;
-  padding: 5rem;
-  border-radius: 6px;
-  color: #fff;
-  box-shadow: 0px 5px 11px 0px rgba(0, 0, 0, 0.5);
-}
-
-/* Configuracion del Encabezado */
-.app-header {
   display: flex;
-  align-items: right;
-  justify-content: space-around;
-  color: greenyellow;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  /*Nos permite ordenar en columanos los elementos*/
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 2px;
 }
 
-.app-header-search {
-  border: 2px solid grey;
-  border-radius: 3rem;
-  padding: 1rem 2rem;
+/* Formato a los posters de cada pelicula */
+.resultSearch div img {
+  width: 90%;
+  display: flex;
+  padding: 4px;
+}
+
+/*Formato del cuadro que almacena la imagen*/
+.image {
+  background-color: rgba(194, 199, 219, 0.815);
+  float: left;
+  width: 50%;
+  height: 300px;
+  padding: 0 20px;
   position: relative;
 }
 
-.app-header-search .form-control {
-  min-width: 420px;
-  color: white;
-}
-
-.app-header-search .search-btn {
-  color: grey;
-  font-size: 2.3rem;
-  cursor: pointer;
-}
-
-/* Cuerpo de la aplicación */
-
-.app-body {
-  margin-top: 4rem;
-  height: 600px;
-  overflow-y: scroll;
-}
-
-.app-body::-webkit-scrollbar {
-  width: 7px;
-}
-
-.app-body::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-.app-body::-webkit-scrollbar-thumb {
-  background-color: green;
-  border-radius: 5px;
-}
-
-/* Menus de Informacion */
-.app-body-tabs-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
-  padding-bottom: 1.6rem;
-  margin: 2.4rem 0;
-}
-.tab-head-single {
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-  font-weight: 500;
-  font-size: 1.9rem;
-  color: #fff;
-  cursor: pointer;
-  transition: all 300ms ease-in-out;
-}
-
-.tab-head-single:hover {
-  opacity: 0.9;
-}
-.tab-head-single.active-tab::after {
-  content: "";
+/*Formato de la imagen del poster, de la pelicula seleccionada*/
+.image img {
   position: absolute;
-  left: 0;
-  bottom: -1rem;
-  width: 100%;
-  height: 4px;
-  background-color: greenyellow;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 10px auto;
+  border-radius: 5px;
+  border: 1px solid #999;
+  background-color: white;
+  padding: 13px;
+  width: 220px;
+  height: 220px;
+  background-size: 100% 100%;
+  background-size: cover;
 }
 
-/* Contenido de la aplicación */
-.app-body-content{
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    column-gap: 4rem;
-    margin-right: 2rem;
+/*El resumen de la pelicula */
+.plot {
+  background-color: rgba(194, 199, 219, 0.815);
+  float: left;
+  text-align: center;
+  float: left;
+  width: 50%;
+  height: 300px;
+  padding: 0 20px;
 }
 
-.app-body-content-thumbnail{
+/*Formato del contenedor de los detalles de la pelicula seleccionada*/
+.info {
+  float: left;
+  width: 50%;
+  padding: 15px;
+  margin-top: 7px;
+  text-align: center;
+  color: rgb(19, 58, 131);
+}
+
+
+.search-btn {
+  color: rgb(2, 2, 2);
+  font-size: 1 rem;
+  cursor: pointer;
+}
+
+/* Detalles de la pelicula seleccionada */
+.info li {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bolder;
+  color: rgb(19, 58, 131);
+}
+
+.info li div span {
+  text-transform: uppercase;
+  padding: 0 1.2rem;
+  font-size: 1rem;
+}
+
+.info li>span {
+  color: rgba(0, 0, 0, 0.308);
+  font-weight: 700;
+}
+
+/*Formato visual del fragmento de galardones*/
+.data {
+  float: left;
+  width: 50%;
+  padding: 0 20px;
+  color: rgb(19, 58, 131)
+}
+
+/*Lo necesario para hacerle responsive*/
+@media only screen and (max-width: 1000px) {
+
+  .image,
+  .info {
     width: 100%;
-    border-radius: 6px;
-    overflow: hidden;
+  }
+
+  .data,
+  .plot {
+    width: 50%;
+  }
+
+  .resultSearch {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
 }
 
-.app-body-content-list .name{
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 3.4rem;
-    font-weight: 500;
-    margin-top: -1.2rem;
+@media only screen and (max-width: 600px) {
+
+  .image,
+  .plot,
+  .data,
+  .info {
+    width: 100%;
+  }
+
+  .resultSearch {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
 }
-
-.app-body-tabs-body{
-    margin-top: 3.6rem;
-}
-
-/* Detalles */
-.detalles{
-    display: none;
-}
-
-.detalles li{
-    display: flex;
-    justify-content: space-between;
-    margin: 1.2rem auto;
-    padding:1.2rem;
-    box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.5);
-}
-
-.detalles li div i{
-    color: red;
-}
-
-.detalles li div span{
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border-radius: 7px;
-    padding: 0 1.2rem;
-    margin: 0 1.6rem;
-    opacity: 0.6;
-    font-size: 1.7rem;
-}
-
-.detalles li > span{
-    color: yellow;
-    font-weight: 700;
-}
-
-/* Reseña */
-.resenia{
-    display: none;
-}
-
-.resenia li{
-    margin: 3.4rem 0;
-}
-
-.resenia li span{
-    text-transform: capitalize;
-    font-weight: 600;
-    font-size: 1.9rem;
-}
-
-.resenia li span:first-child{
-    font-weight: 600;
-    color: grey;
-    margin-right: 1rem;
-}
-
-.resenia li span:last-child{
-    font-weight: 300;
-}
-
-/* Calificaciones */
-
-.calificacion{
-    display: none;
-}
-
-.calificacion li{
-    margin: 3.2rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.calificacion li span:first-child i {
-    color: yellow;
-    margin-right: 1.4rem;
-}
-
-.calificacion li span:first-child{
-    text-transform:capitalize;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-right: 4rem;
-}
-
-.calificacion li span:last-child{
-    font-weight: 600;
-    text-transform: capitalize;
-    border-radius: 2rem;
-    padding: 0 1rem;
-    text-align: right;
-}
-
-/* Para hacer aparecer el submenu */
-.show-tab{
-    display: block;
-}
-
-/* Media Query */
-
-@media screen and (max-width: 1200px) {
-    .app-body-content{
-        grid-template-columns: 1fr 3fr;
-        align-items: center;
-    }
-    .tab-head-single{
-        margin: 1.5rem 0;
-    }
-    
-}
-
-@media screen and (max-width: 1000px) {
-    .app-body-content-list .name{
-        text-align: center;
-        margin-top: 1.8rem;
-    }
-    .app-body-content{
-        grid-template-columns: 1fr;
-        row-gap: 4rem;
-        max-width: 680px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-    .app-body-content-thumbnail{
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-}
-
-@media screen and (max-width: 992px) {
-    .app-header{
-        flex-direction: column;
-    }
-    .app-header-search{
-        margin-top: 2.8rem;
-    }
-    
-}
-
-@media screen and (max-width:768px) {
-    .app-body-tabs-head{
-        flex-direction: column;
-    }
-    .app-header-search{
-        display: flex;
-    }
-    .app-header-search .form-control{
-        min-width: auto;
-        background-color: #0c0c0c;
-    }
-    .app-header-search .search-btn{
-        padding-left: 2rem;
-    }
-    .app-body-tabs-body{
-        margin-right: 3rem;
-    }
-    
-}
-

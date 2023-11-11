@@ -1,75 +1,72 @@
-//MOSTRAR Y OCULTAR CONTENIDO
+//Formulario de busqueda
+const searchMovieForm = document.querySelector(".app-search");
 
-// Inicializar constantes y llenarlas con los datos del body y del header de los menus
-const allTabsBody = document.querySelectorAll(".tab-body-single");
-const allTabsHead = document.querySelectorAll(".tab-head-single");
 
-//Indica cual menu esta activo
-let activeTab = 1;
-
-//Funcion que se genera cada que se inicializa la app
-const init = () => {
-  showActiveTabBody();
-  showActiveTabHead();
-};
-
-//Muestra el menu
-const showActiveTabHead = () => {
-  allTabsHead[activeTab - 1].classList.add("active-tab");
-};
-
-//Muestra la informacion
-const showActiveTabBody = () => {
-  hideAllTabBody();
-  allTabsBody[activeTab - 1].classList.add("show-tab");
-};
-
-//Bloquea la informacion
-const hideAllTabBody = () => {
-  allTabsBody.forEach((singleTabBody) =>
-    singleTabBody.classList.remove("show-tab")
-  );
-};
-
-//Desactiva el menu
-const hideAllTabHead = () => {
-  allTabsHead.forEach((singleTabHead) =>
-    singleTabHead.classList.remove("active-tab")
-  );
-};
 //Funcion de escucha de cuando se inicializa
-window.addEventListener("DOMContentLoaded", () => init());
+window.addEventListener("DOMContentLoaded", () => initData());
 
-//Funcion para cambiar el menu y el contenido activos
-allTabsHead.forEach((singleTabHead) => {
-  singleTabHead.addEventListener("click", () => {
-    hideAllTabHead();
-    activeTab = singleTabHead.dataset.id;
-    showActiveTabHead();
-    showActiveTabBody();
-  });
-});
+//Se carga la pantalla con una imagen predefinida
+const initData = () => {
+  document.querySelector(
+    ".image"
+  ).innerHTML = `
+      <h2>Poster </h2>
+      <img src="https://www.pngfind.com/pngs/m/21-211553_camara-de-fotos-antigua-vector-hd-png-download.png" alt="Imágen de la película">
+      `;
+};
 
-//BUSQUEDA
-
-//Creacion de variables que carguen la informacion del search y la lista de busqueda y variable vacia para cargar todos los datos de la API
-const searchForm = document.querySelector(".app-header-search");
-let allData;
-
-//Obtener el valor de la busqueda
+//Permite que reconozca el enter o click en la lupa para la busqueda
 const getInputValue = (event) => {
   event.preventDefault();
-  let searchText = searchForm.search.value;
+  let searchText = searchMovieForm.search.value;
   fetchMovies(searchText);
 };
 
-//Evento de escucha de la barra de busqueda
-searchForm.addEventListener("submit", getInputValue);
+searchMovieForm.addEventListener("submit", getInputValue);
 
 //Busqueda en la API
-//api key de uso de API en películas= 8284dc57
+//api key de uso de API en películas obtenia en https://www.omdbapi.com/es 8284dc57
 const fetchMovies = async (searchText) => {
-  let url = `https://www.omdbapi.com/?apikey=8284dc57&t=${searchText}`;
+  let url = `https://www.omdbapi.com/?apikey=8284dc57&s=${searchText}`;
+  try {
+    const response = await fetch(url);
+    data = await response.json();
+    console.log(url);
+    if (data.Error === "Movie not found!") {
+      document.querySelector(
+        ".resultSearch"
+      ).innerHTML = `
+          <h3>${data.Error}</h3>
+          `;
+    } else if (data.Error === "Too many results.") {
+      document.querySelector(
+        ".resultSearch"
+      ).innerHTML = `
+          <h3>${data.Error}</h3>
+          `;
+    } else {
+      showMovieResult(data.Search)
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//Muestra todas la peliculas devueltas por la api que concidan con el texto
+const showMovieResult = (info) => {
+  listado = "";
+  info.forEach((movie) => {
+    listado = listado + `<div class="resultSearchPoster"><img src="${movie.Poster}" alt="${movie.Title}" onclick="fetchOneMovie('${movie.imdbID}')"/></div>`;
+  });
+  document.querySelector(
+    ".resultSearch"
+  ).innerHTML = `${listado}`;
+
+}
+
+//Obtiene la informacion de la pelicula seleccionada
+const fetchOneMovie = async (searchText) => {
+  let url = `https://www.omdbapi.com/?apikey=8284dc57&i=${searchText}`;
   try {
     const response = await fetch(url);
     data = await response.json();
@@ -79,83 +76,84 @@ const fetchMovies = async (searchText) => {
   }
 };
 
-//Rellena de informacion a cada seccion de la película
+//Muestra la informacion obtenida desde la api y crea la parte visual
 const showMovieDetails = (info) => {
 
   console.log(info);
 
   document.querySelector(
-    ".app-body-content-thumbnail"
-  ).innerHTML = `<img src="${info.Poster}" alt="${info.Title}"/>`;
+    ".image"
+  ).innerHTML = `
+    <h2>${info.Title}</h2>
+    <img src="${info.Poster}" alt="${info.Title}"/>
+    `;
 
-  document.querySelector(".detalles").innerHTML = `
-  <li>
-      <div>
-          <span>Año</span>
-      </div>
-      <span>${info.Year}</span>
-  </li>
-  <li>
-      <div>
-          <span>Clasificación</span>
-      </div>
-      <span>${info.Rated}</span>
-  </li>
-  <li>
-      <div>
-          <span>Duración</span>
-      </div>
-      <span>${info.Runtime}</span>
-  </li>
-  <li>
-      <div>
-          <span>Género</span>
-      </div>
-      <span>${info.Genre}</span>
-  </li>
-  <li>
-      <div>
-          <span>Director</span>
-      </div>
-      <span>${info.Director}</span>
-  </li>
-  <li>
-      <div>
-          <span>Reparto</span>
-      </div>
-      <span>${info.Actors}</span>
-  </li>
-  <li>
-      <div>
-          <span>Lenguaje</span>
-      </div>
-      <span>${info.Language}</span>
-  </li>
-  `;
-  document.querySelector(".resenia").innerHTML =`
-  <li>      
-      <span>${info.Plot}</span>
-  </li>
-  `;
-  let listado="";
+  document.querySelector(".info").innerHTML = `
+    <h2>Información</h2>
+    <li>
+        <div>
+            <span>Año</span>
+        </div>
+        <span>${info.Year}</span>
+    </li>
+    <li>
+        <div>
+            <span>Clasificación</span>
+        </div>
+        <span>${info.Rated}</span>
+    </li>
+    <li>
+        <div>
+            <span>Duración</span>
+        </div>
+        <span>${info.Runtime}</span>
+    </li>
+    <li>
+        <div>
+            <span>Género</span>
+        </div>
+        <span>${info.Genre}</span>
+    </li>
+    <li>
+        <div>
+            <span>Director</span>
+        </div>
+        <span>${info.Director}</span>
+    </li>
+    <li>
+        <div>
+            <span>Reparto</span>
+        </div>
+        <span>${info.Actors}</span>
+    </li>
+    <li>
+        <div>
+            <span>Lenguaje</span>
+        </div>
+        <span>${info.Language}</span>
+    </li>
+    `;
+
+  document.querySelector(".plot").innerHTML = `
+        <h2>Reseña</h2>
+        <span>${info.Plot}</span>
+    `;
+  let listado = "<h2>Calificacion</h2>";
   info.Ratings.forEach((rating) => {
     listado = listado + `
-    <li>
-    <div>
-      <span>${rating.Source}</span>
-    </div>      
-    <span>${rating.Value}</span>
-  </li>`;
+      <div>
+        <span>${rating.Source}</span>
+      </div>
+      <div>      
+      <span>${rating.Value}</span>
+      </div>
+      `;
   });
 
-  document.querySelector(".calificacion").innerHTML =`
-  <li>
-    <div>
-      <span>Galardones</span>
-    </div>      
-    <span>${info.Awards}</span>
-  </li>${listado}
-  `;
-  
+  document.querySelector(".data").innerHTML = `
+      <h2>Galardones</h2>   
+      <span>${info.Awards}</span>
+      ${listado}
+    `;
 
 };

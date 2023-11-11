@@ -1,93 +1,60 @@
-<html lang="es">
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Titulo de la pagina, pestaña -->
-    <title>MOVIE SEARCH UTPL</title>
     <link rel="stylesheet" href="main.css">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
+    <!--Necesario para que funcionen los iconos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>MOVIE SEARCH UTPL</title>
 </head>
-<body>
 
-    <div class="main-wrapper">
-        <div class="app">
+<body style="font-family:Verdana;">
 
-            <!-- Encabezado -->
-            <div class="app-header">
-                <h1 class="app-header-title">MOVIE SEARCH</span></h1>
-                <form class="app-header-search">
-                    <!-- Formulario de busqueda de pelicula -->
-                    <input type="text" class="form-control" placeholder="Busca tu siguiente película" name="search">
-                    <button type="submit" class="search-btn">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
-            <!-- Fin de Encabezado -->
-            <div class="app-body">
-                <div class="app-body-content">
-                    <!-- Póster de la película -->
-                    <div class="app-body-content-thumbnail">
-                         <!-- Imagen generica antes de buscar película -->
-                        <img src="https://www.pngfind.com/pngs/m/21-211553_camara-de-fotos-antigua-vector-hd-png-download.png" alt="Imágen de la película">
-                    </div>
-                    <!-- Fin del póster de la película  -->
-
-                    <!-- Información de la película -->
-                    <div class="app-body-content-list">
-                        <div class="name">Buscador de películas</div>
-                        <!-- Menús-->
-                        <div class="app-body-tabs-head">
-                            <button type="button" class="tab-head-single" data-id="1">
-                                <span>Información</span>
-                            </button>
-                            <button type="button" class="tab-head-single" data-id="2">
-                                <span>Reseña</span>
-                            </button>
-                            <button type="button" class="tab-head-single" data-id="3">
-                                <span>Calificaciones</span>
-                            </button>
-                        </div>
-                        <!-- Fin de Menús -->
-
-                        <div class="app-body-tabs-body">
-                            <ul class="tab-body-single detalles">
-                                <span>Se visualizará los detalles de la película</span>
-                            </ul>
-                            <!-- Fin de la Información de los detalles de la película -->
-
-                            <!-- Reseña de la película -->
-                            <ul class="tab-body-single resenia">
-                                <span>Descripción de la trama de la película</span>
-                            </ul>
-                            <!-- Fin de la reseña de la película -->
-
-                            <!-- Calificaciones de las películas (rating) -->
-                            <ul class="tab-body-single calificacion">
-                                <span>Calificaciones entregadas por reconocidas páginas</span>
-                            </ul>
-                            <!-- Fin de las calificaciones de la películas  -->
-                        </div>
-
-                    </div>
-                    <!-- Fin de la Información de la película -->
-
-                </div>
-
-            </div>
-
-        </div>
-
+    <!-- Titulo de la pagina -->
+    <div class="titulo">
+        <h1 class="t-stroke t-shadow">MOVIE SEARCH</h1>
     </div>
 
-    <!-- Import del script de funcionalidades-->
+    <div style="overflow:auto">
+        <div class="searchBox">
+            <form class="app-search">
+                <!-- Formulario de busqueda de pelicula -->
+                <input type="text" class="form-control" placeholder="Busca tu siguiente película" name="search">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        <div class="resultSearch">
+        </div>
+        <div class="info">
+            <!--Todos los detalles de la pelicula-->
+            <h2>Información de la pelicula</h2>
+            <span>Se visualizará los detalles de la película</span>
+        </div>
+        <!-- La portada que nos devuelve la API-->
+        <div class="image">
+            <h2>Poster</h2>
+        </div>
+        <!-- La reseña de la peliculta-->
+        <div class="plot">
+            <h2>Reseña</h2>
+            <span>Descripción de la trama de la película</span>
+        </div>
+        <!-- Premios ganados y criticas de paginas reconocidas-->
+        <div class="data">
+            <h2>Galardones</h2>
+            <span>Diferentes premios obtenidos</span>
+            <h2>Calificación</h2>
+            <span>Calificaciones entregadas por reconocidas páginas</span>
+        </div>
+    </div>
+
     <script src="app.js"></script>
-    
+
 </body>
+
 </html>
